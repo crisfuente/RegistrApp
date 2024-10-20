@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bienvenido: {{ usuario }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <H2>Opciones</H2>
+  <!-- Tarjeta para Mis Asignaturas -->
+  <ion-card (click)="asignaturas()">
+    <ion-card-header>
+      <ion-card-title>Mis Asignaturas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- colocar imagen para mis asignaturas -->
+      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
+      <p>Accede a la página de Mis Asignaturas.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="asistencias()">
+    <ion-card-header>
+      <ion-card-title>Mis Asistencias</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- colocar imagen para mis asignaturas -->
+      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
+      <p>Accede a la página de Mis Asistencias.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="registroAsistencia()">
+    <ion-card-header>
+      <ion-card-title>registrar asitencia</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- colocar imagen para mis asignaturas -->
+      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
+      <p>Cambiar la clave.</p>
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card (click)="cambiarClave()">
+    <ion-card-header>
+      <ion-card-title>Cambiar clave</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- colocar imagen para mis asignaturas -->
+      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
+      <p>Cambiar la clave.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="logout()">salir</ion-button>
+</ion-content>

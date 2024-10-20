@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registrar Asistencia</ion-title>
+    <ion-buttons slot="end">
+      <!-- Botón para abrir el menú -->
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content"> 
+  <!-- Nombre -->
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="nombre" type="text"></ion-input>
+  </ion-item>
+
+  <!-- Fecha -->
+  <ion-item>
+    <ion-label position="floating">Fecha</ion-label>
+    <ion-datetime [(ngModel)]="fecha" displayFormat="DD/MM/YYYY"></ion-datetime>
+  </ion-item>
+
+  <!-- Estado -->
+  <ion-item>
+    <ion-label>Estado</ion-label>
+    <ion-select [(ngModel)]="estado">
+      <ion-select-option value="Presente">Presente</ion-select-option>
+      <ion-select-option value="Ausente">Ausente</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- guardar -->
+  <ion-button expand="block" (click)="guardarAsistencia()">
+    Guardar Asistencia
+  </ion-button>
+
+  <!-- Imagen QR temporal -->
+  <div style="text-align: center; margin-top: 20px;">
+    <img src="src/assets/qr-code.png" alt="QR temporal">
+  </div>
+</ion-content>
+
+<!-- Menú lateral -->
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <!--retorno menu -->
+        <ion-button expand="full" (click)="retorno()">
+          Retorno
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

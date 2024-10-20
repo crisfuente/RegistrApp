@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Mis Asignaturas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Lista de Asignaturas -->
+  <ion-list>
+    <ion-item *ngFor="let asignatura of asignaturas">
+      <ion-label>
+        <h2>{{ asignatura.nombre }}</h2>
+        <p>Sección: {{ asignatura.seccion }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  
+<ion-button (click)="retorno()" expand="block">
+  Volver al menu
+</ion-button>
+</ion-content>

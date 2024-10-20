@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>asistencias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let asistencia of asistencias">
+      <ion-label>
+        <h2> Clase: {{asistencia.clase}} Dia: {{ asistencia.dia }}</h2>
+       
+        <p>Estado: <strong [ngClass]="{'text-success': asistencia.estado === 'Presente', 'text-danger': asistencia.estado === 'Ausente'}">{{ asistencia.estado }}</strong></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Botón de retorno -->
+  <ion-button expand="block" (click)= "retorno()">
+    Retorno
+  </ion-button>
+</ion-content>
