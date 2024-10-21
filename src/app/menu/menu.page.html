@@ -1,57 +1,71 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Bienvenido: {{ usuario }}</ion-title>
+    <ion-buttons slot="end">
+      <!-- Botón abrir el menú -->
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
+<ion-content id="main-content">
+  <h2>Opciones</h2>
 
-<ion-content>
-  <H2>Opciones</H2>
-  <!-- Tarjeta para Mis Asignaturas -->
+  <!-- Mis Asignaturas -->
   <ion-card (click)="asignaturas()">
     <ion-card-header>
       <ion-card-title>Mis Asignaturas</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- colocar imagen para mis asignaturas -->
-      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
       <p>Accede a la página de Mis Asignaturas.</p>
     </ion-card-content>
   </ion-card>
 
+  <!-- Mis Asistencias -->
   <ion-card (click)="asistencias()">
     <ion-card-header>
       <ion-card-title>Mis Asistencias</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- colocar imagen para mis asignaturas -->
-      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
       <p>Accede a la página de Mis Asistencias.</p>
     </ion-card-content>
   </ion-card>
 
+  <!--  Registro de Asistencia -->
   <ion-card (click)="registroAsistencia()">
     <ion-card-header>
-      <ion-card-title>registrar asitencia</ion-card-title>
+      <ion-card-title>Registrar Asistencia</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- colocar imagen para mis asignaturas -->
-      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
-      <p>Cambiar la clave.</p>
+      <p>Accede a la página de Registro de Asistencia.</p>
     </ion-card-content>
   </ion-card>
 
-
+  <!-- Cambiar Clave -->
   <ion-card (click)="cambiarClave()">
     <ion-card-header>
-      <ion-card-title>Cambiar clave</ion-card-title>
+      <ion-card-title>Cambiar Clave</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <!-- colocar imagen para mis asignaturas -->
-      <!-- <img src="src/assets/MisAsignaturas.jpg"> -->
       <p>Cambiar la clave.</p>
     </ion-card-content>
   </ion-card>
-
-  <ion-button expand="block" (click)="logout()">salir</ion-button>
 </ion-content>
+
+<!-- Menú lateral -->
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <!-- salir -->
+        <ion-button expand="block" (click)="logout()">Salir</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
