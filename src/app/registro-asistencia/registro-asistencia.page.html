@@ -2,13 +2,13 @@
   <ion-toolbar>
     <ion-title>Registrar Asistencia</ion-title>
     <ion-buttons slot="end">
-      <!-- Botón para abrir el menú -->
-      <ion-menu-button auto-hide="false"></ion-menu-button>
+      <!-- Botón para abrir el menú lateral de asistencia -->
+      <ion-menu-button menu="menu-asistencia" auto-hide="false"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="main-content"> 
+<ion-content id="main-content">
   <!-- Nombre -->
   <ion-item>
     <ion-label position="floating">Nombre</ion-label>
@@ -30,19 +30,19 @@
     </ion-select>
   </ion-item>
 
-  <!-- guardar -->
+  <!-- Botón Guardar -->
   <ion-button expand="block" (click)="guardarAsistencia()">
     Guardar Asistencia
   </ion-button>
 
   <!-- Imagen QR temporal -->
   <div style="text-align: center; margin-top: 20px;">
-    <img src="src/assets/qr-code.png" alt="QR temporal">
+    <img src="assets/qr-code.png" alt="QR temporal" style="width: 200px;">
   </div>
 </ion-content>
 
-<!-- Menú lateral. -->
-<ion-menu side="end" contentId="main-content">
+<!-- Menú lateral de registro de asistencia -->
+<ion-menu side="end" contentId="main-content" menuId="menu-asistencia">
   <ion-header>
     <ion-toolbar>
       <ion-title>Opciones</ion-title>
@@ -52,10 +52,8 @@
   <ion-content>
     <ion-list>
       <ion-item>
-        <!--retorno menu -->
-        <ion-button expand="full" (click)="retorno()">
-          Retorno
-        </ion-button>
+        <!-- Retorno al menú principal -->
+        <ion-button expand="full" (click)="retorno()">Retorno</ion-button>
       </ion-item>
     </ion-list>
   </ion-content>

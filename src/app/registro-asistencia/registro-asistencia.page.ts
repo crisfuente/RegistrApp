@@ -33,7 +33,7 @@ export class RegistroAsistenciaPage {
     }
   }
 
-  // retorno menú 
+  // retorno menú
   retorno() {
     this.router.navigate(['/menu']);
   }
