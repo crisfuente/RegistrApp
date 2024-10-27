@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginPage {
   usuario: string = '';
   clave: string = '';
 
-  constructor(private router: Router, private alertController: AlertController, private authService: AuthService) {}
+  constructor(private router: Router, private alertController: AlertController, 
+    private authService: AuthService) {}
 
   // Método de inicio de sesión
   async login() {
