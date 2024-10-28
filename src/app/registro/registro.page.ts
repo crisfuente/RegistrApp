@@ -40,4 +40,8 @@ export class RegistroPage {
     });
     await alert.present();
   }
+
+  retornoLogin(){
+    this.router.navigate(['/login']);
+  }
 }

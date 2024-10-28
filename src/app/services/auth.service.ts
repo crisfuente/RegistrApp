@@ -4,17 +4,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  // Lista de usuarios registrados (esto normalmente sería una base de datos)
-  private usuariosRegistrados = [
-    { username: 'Usuario1', password: 'MiClav3' }
-  ];
+  private usuariosRegistrados: { username: string, password: string }[] = [];
 
-  constructor() {}
+  constructor() {
+    // Cargar usuarios desde localStorage al iniciar el servicio
+    const usuariosGuardados = localStorage.getItem('usuariosRegistrados');
+    this.usuariosRegistrados = usuariosGuardados ? JSON.parse(usuariosGuardados) : [];
+  }
 
   // Método para iniciar sesión
   login(usuario: string, clave: string): boolean {
     const user = this.usuariosRegistrados.find(u => u.username === usuario && u.password === clave);
-    return !!user; // Retorna true si las credenciales coinciden, de lo contrario false
+    if (user) {
+      localStorage.setItem('loggedIn', 'true'); // Guardar estado de autenticación
+      return true; // Inicio de sesión exitoso
+    }
+    return false; // Credenciales incorrectas
   }
 
   // Método para verificar si el usuario está autenticado
@@ -24,16 +29,17 @@ export class AuthService {
 
   // Método para cerrar sesión
   logout(): void {
-    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('loggedIn'); // Eliminar estado de autenticación
   }
 
-  // Método para registrar un nuevo usuario
+  // Método mejorado para registrar un nuevo usuario
   registrar(usuario: string, clave: string): boolean {
-    const existe = this.usuariosRegistrados.find(u => u.username === usuario);
+    const existe = this.usuariosRegistrados.some(u => u.username === usuario);
     if (existe) {
       return false; // El usuario ya existe, retorno de error
     } else {
       this.usuariosRegistrados.push({ username: usuario, password: clave });
+      this.guardarUsuarios(); // Guardar en localStorage
       return true; // Registro exitoso
     }
   }
@@ -43,8 +49,14 @@ export class AuthService {
     const user = this.usuariosRegistrados.find(u => u.username === usuario);
     if (user) {
       user.password = nuevaClave; // Actualiza la contraseña
+      this.guardarUsuarios(); // Guardar cambios en localStorage
       return true; // Cambio de contraseña exitoso
     }
     return false; // Usuario no encontrado
+  }
+
+  // Método para guardar la lista de usuarios en localStorage
+  private guardarUsuarios(): void {
+    localStorage.setItem('usuariosRegistrados', JSON.stringify(this.usuariosRegistrados));
   }
 }
