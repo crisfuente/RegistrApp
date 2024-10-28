@@ -49,6 +49,10 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
+  {
+    path: 'crear-qr',
+    loadChildren: () => import('./crear-qr/crear-qr.module').then( m => m.CrearQRPageModule)
+  },
 
 
   
