@@ -25,7 +25,7 @@ export class AsignaturasPage {
 
   // Función para gestionar el retorno al menú principal
   retorno() {
-    this.router.navigate(['/menu-docente']);
+    this.router.navigate(['/menu']);
   }
 
   // Función para crear un QR de asistencia basado en la asignatura seleccionada

@@ -17,17 +17,12 @@ export class MenuDocentePage {
 
   // Función para acceder a la página de asignaturas
   asignaturas() {
-    this.router.navigate(['/asignaturas']);
+    this.router.navigate(['/asignaturas-docente']);
   }
 
   // Función para crear el código QR
   crearQR() {
     this.router.navigate(['/crear-qr']);
-  }
-
-  // Función de retorno a la página anterior
-  volver() {
-    this.router.navigate(['/login']); // Navegar a la página de inicio de sesión o la página anterior deseada
   }
 
   // Función para cambiar la clave

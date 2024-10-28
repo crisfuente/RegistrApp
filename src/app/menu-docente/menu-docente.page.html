@@ -9,7 +9,7 @@
 
 <ion-content id="main-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
   <!-- Mostrar nombre del docente -->
-  <h2 style="margin: 20px;">Docente: {{ usuario }}</h2>
+  <h2 style="margin: 20px;">Funciones</h2>
 
   <!-- Opciones del Docente -->
   <ion-card (click)="asignaturas()" style="margin-bottom: 15px;">
@@ -29,11 +29,6 @@
       <p>Genera un código QR para la asignatura seleccionada.</p>
     </ion-card-content>
   </ion-card>
-
-  <!-- Botón de Retorno -->
-  <div style="margin-top: 30px;">
-    <ion-button (click)="volver()" color="secondary">Retorno</ion-button>
-  </div>
 </ion-content>
 
 <!-- Menú lateral -->
