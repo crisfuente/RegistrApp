@@ -1,13 +1,54 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>menu-docente</ion-title>
+    <ion-title>Bienvenido: {{ usuario }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content id="main-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+  <!-- Mostrar nombre del docente -->
+  <h2 style="margin: 20px;">Docente: {{ usuario }}</h2>
+
+  <!-- Opciones del Docente -->
+  <ion-card (click)="asignaturas()" style="margin-bottom: 15px;">
+    <ion-card-header>
+      <ion-card-title>Listado de Asignaturas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Accede a la página con el listado de asignaturas que dictas.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="crearQR()" style="margin-bottom: 15px;">
+    <ion-card-header>
+      <ion-card-title>Crear Código QR</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Genera un código QR para la asignatura seleccionada.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón de Retorno -->
+  <div style="margin-top: 30px;">
+    <ion-button (click)="volver()" color="secondary">Retorno</ion-button>
+  </div>
+</ion-content>
+
+<!-- Menú lateral -->
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">menu-docente</ion-title>
+      <ion-title>Opciones</ion-title>
     </ion-toolbar>
   </ion-header>
-</ion-content>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-button expand="block" (click)="logout()">Salir</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

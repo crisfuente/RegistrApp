@@ -27,7 +27,7 @@ export class LoginPage {
 
       if (isValidUser) {
         // Obtener el rol del usuario autenticado (asignar cadena vacía si es null)
-        this.rol = this.authService.getUserRole(this.usuario) || ''; 
+        this.rol = this.authService.getUserRole(this.usuario) || '';
 
         // Redirigir según el rol
         if (this.rol === 'alumno') {
