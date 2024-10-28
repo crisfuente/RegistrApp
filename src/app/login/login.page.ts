@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
-import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,18 +12,20 @@ export class LoginPage {
   usuario: string = '';
   clave: string = '';
 
-  constructor(private router: Router, private alertController: AlertController, 
-    private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private alertController: AlertController,
+    private authService: AuthService
+  ) {}
 
   // Método de inicio de sesión
   async login() {
-
     if (this.authService.login(this.usuario, this.clave)) {
       localStorage.setItem('usuario', this.usuario);
-      // direccion a menu
+      // Dirección a menu
       this.router.navigate(['/menu']);
     } else {
-      // error en caso de credenciales invalidas
+      // Error en caso de credenciales inválidas
       const alert = await this.alertController.create({
         header: 'Error',
         message: 'Usuario o contraseña incorrectos',
@@ -34,11 +35,36 @@ export class LoginPage {
     }
   }
 
+  // Navegar a la página para cambiar la clave
+  irACambiarClave() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/clave-nueva']);
+    } else {
+      this.mostrarAlerta('Error', 'Debe iniciar sesión para acceder a esta página.');
+    }
+  }
+
+  // Mostrar alerta para mensajes genéricos
+  async mostrarAlerta(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   async recuperarClave() {
     const alert = await this.alertController.create({
       header: 'Recuperación de Clave',
-      message: 'Se ha enviado un correo para restablecer la contraseña.',
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(['/nueva-clave']); // clave-nueva
+          }
+        }
+      ]
     });
     await alert.present();
   }

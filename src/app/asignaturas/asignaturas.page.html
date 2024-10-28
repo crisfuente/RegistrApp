@@ -1,11 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Mis Asignaturas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="retorno()">Volver al Menú</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- Lista de Asignaturas como cartas -->
   <ion-list>
     <ion-card *ngFor="let asignatura of asignaturas; let i = index" (click)="toggleAsistencia(i)">
       <ion-card-header>
@@ -13,16 +15,10 @@
       </ion-card-header>
       <ion-card-content>
         <p>Sección: {{ asignatura.seccion }}</p>
-        <!-- Mostrar asistencia solo si la carta está expandida -->
-        <div *ngIf="asignatura.mostrarAsistencia">
-          <p>Asistencia: {{ asignatura.asistencia }}</p>
-        </div>
       </ion-card-content>
     </ion-card>
   </ion-list>
 
   <!-- Botón para regresar al menú -->
-  <ion-button (click)="retorno()" expand="block" style="margin-top: 20px;">
-    Volver al menú
-  </ion-button>
+
 </ion-content>

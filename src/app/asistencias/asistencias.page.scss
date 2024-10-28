@@ -1,8 +1,29 @@
-.text-success {
-    color: green;
-  }
-  
-  .text-danger {
-    color: red;
-  }
-  
+.presente {
+  color: green;
+  font-weight: bold;
+}
+
+.ausente {
+  color: red;
+  font-weight: bold;
+}
+
+ion-card {
+  margin: 10px;
+  border-radius: 8px;
+}
+
+ion-card-header {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+ion-card-content {
+  background-color: #ffffff;
+}
+
+ion-item {
+  --background: #e7f4ff;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}

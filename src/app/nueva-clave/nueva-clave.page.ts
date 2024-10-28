@@ -52,14 +52,18 @@ export class NuevaClavePage {
     });
     await alert.present();
   }
-
-  //retorno al login
+  //retorno normal
   retorno(){
     this.router.navigate(['/login']);
   }
 
-  //retorno al menu
-  retorno2(){
-    this.router.navigate(['/menu']);
+  // Retorno al menú solo si está autenticado
+  retorno2() {
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/menu']); // Solo redirigir si el usuario está autenticado
+    } else {
+      this.mostrarAlerta('Acceso Denegado', 'Debe iniciar sesión para acceder al menú.');
+      this.router.navigate(['/login']); // Redirigir a login si no está autenticado
+    }
   }
 }
