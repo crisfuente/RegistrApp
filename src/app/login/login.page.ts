@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginPage {
   usuario: string = '';
   clave: string = '';
+  rol: string = ''; // Inicialmente es un string vacío
 
   constructor(
     private router: Router,
@@ -20,36 +21,33 @@ export class LoginPage {
 
   // Método de inicio de sesión
   async login() {
-    if (this.authService.login(this.usuario, this.clave)) {
-      localStorage.setItem('usuario', this.usuario);
-      // Dirección a menu
-      this.router.navigate(['/menu']);
-    } else {
-      // Error en caso de credenciales inválidas
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Usuario o contraseña incorrectos',
-        buttons: ['OK']
-      });
-      await alert.present();
+    try {
+      // Llamar al servicio de autenticación
+      const isValidUser = await this.authService.login(this.usuario, this.clave);
+
+      if (isValidUser) {
+        // Obtener el rol del usuario autenticado (asignar cadena vacía si es null)
+        this.rol = this.authService.getUserRole(this.usuario) || ''; 
+
+        // Redirigir según el rol
+        if (this.rol === 'alumno') {
+          this.router.navigate(['/menu']);
+        } else if (this.rol === 'docente') {
+          this.router.navigate(['/menu-docente']);
+        } else {
+          this.mostrarAlerta('Error', 'Rol de usuario no reconocido.');
+        }
+      } else {
+        // Mostrar error si las credenciales son incorrectas
+        this.mostrarAlerta('Error', 'Usuario o contraseña incorrectos.');
+      }
+    } catch (error) {
+      this.mostrarAlerta('Error', 'Ocurrió un error inesperado.');
+      console.error(error);
     }
   }
 
-  // Navegar a la página para cambiar la clave
-  irACambiarClave() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/clave-nueva']);
-    } else {
-      this.mostrarAlerta('Error', 'Debe iniciar sesión para acceder a esta página.');
-    }
-  }
-
-  // Navegar a la página de registro
-  irARegistro() {
-    this.router.navigate(['/registro']);
-  }
-
-  // Mostrar alerta para mensajes genéricos
+  // Método para mostrar una alerta
   async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
@@ -59,6 +57,12 @@ export class LoginPage {
     await alert.present();
   }
 
+  // Navegar a la página de registro
+  irARegistro() {
+    this.router.navigate(['/registro']);
+  }
+
+  // Navegar a la página para recuperar la clave
   async recuperarClave() {
     const alert = await this.alertController.create({
       header: 'Recuperación de Clave',

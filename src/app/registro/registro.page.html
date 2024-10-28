@@ -1,22 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Registro de Usuario</ion-title>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-item>
-    <ion-label position="floating">Nuevo Usuario</ion-label>
-    <ion-input [(ngModel)]="nuevoUsuario" required></ion-input>
+    <ion-label position="floating">Nombre de Usuario</ion-label>
+    <ion-input [(ngModel)]="nuevoUsuario"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Nueva Contraseña</ion-label>
-    <ion-input [(ngModel)]="nuevaClave" type="password" required></ion-input>
+    <ion-label position="floating">Contraseña</ion-label>
+    <ion-input [(ngModel)]="nuevaClave" type="password"></ion-input>
   </ion-item>
 
-  <ion-button expand="block" (click)="registrar()">Registrar</ion-button>
-  <br>
-    <!-- Botón de Restablecer Contraseña -->
-    <ion-button fill="clear" expand="block" (click)="retornoLogin()">Restablecer Contraseña</ion-button>
+  <!-- Selección de Rol -->
+  <ion-item>
+    <ion-label>Rol</ion-label>
+    <ion-select [(ngModel)]="rolSeleccionado">
+      <ion-select-option value="docente">Docente</ion-select-option>
+      <ion-select-option value="alumno">Alumno</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="full" (click)="registrar()">Registrar</ion-button>
+  <ion-button expand="full" color="light" (click)="retornoLogin()">Volver al Login</ion-button>
 </ion-content>

@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class RegistroPage {
   nuevoUsuario: string = '';
   nuevaClave: string = '';
+  rolSeleccionado: string = ''; // Variable para el rol seleccionado
 
   constructor(
     private router: Router,
@@ -19,8 +20,9 @@ export class RegistroPage {
   ) {}
 
   async registrar() {
-    if (this.nuevoUsuario && this.nuevaClave) {
-      const registroExitoso = this.authService.registrar(this.nuevoUsuario, this.nuevaClave);
+    if (this.nuevoUsuario && this.nuevaClave && this.rolSeleccionado) {
+      // Llama a AuthService pasando el rol
+      const registroExitoso = this.authService.registrar(this.nuevoUsuario, this.nuevaClave, this.rolSeleccionado);
       if (registroExitoso) {
         await this.mostrarAlerta('Éxito', 'Usuario registrado correctamente.');
         this.router.navigate(['/login']); // Redirigir al login después de registrarse
@@ -32,6 +34,7 @@ export class RegistroPage {
     }
   }
 
+  // Mostrar alertas de éxito o error
   async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
@@ -41,7 +44,8 @@ export class RegistroPage {
     await alert.present();
   }
 
-  retornoLogin(){
+  // Volver al login
+  retornoLogin() {
     this.router.navigate(['/login']);
   }
 }

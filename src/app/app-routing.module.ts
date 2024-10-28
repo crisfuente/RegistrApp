@@ -7,6 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     
   },
+  
   {
     path: '',
     redirectTo: 'login',
@@ -16,6 +17,12 @@ const routes: Routes = [
     path: 'menu',
     loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
   },
+  
+  {
+    path: 'menu-docente',
+    loadChildren: ()=> import('./menu-docente/menu-docente.module').then(m => m.MenuDocentePageModule)
+  },
+
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
@@ -42,8 +49,12 @@ const routes: Routes = [
     path: 'registro',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   },
+
+
+  
   
 ];
+
 
 @NgModule({
   imports: [

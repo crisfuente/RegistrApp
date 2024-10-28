@@ -4,58 +4,69 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  private usuariosRegistrados: { username: string, password: string }[] = [];
+  // Usuarios almacenados con rol
+  private usuariosRegistrados: { username: string, password: string, role: string }[] = [];
 
   constructor() {
-    // Cargar usuarios desde localStorage al iniciar el servicio
+    // Cargar usuarios registrados desde localStorage
     const usuariosGuardados = localStorage.getItem('usuariosRegistrados');
     this.usuariosRegistrados = usuariosGuardados ? JSON.parse(usuariosGuardados) : [];
   }
 
   // Método para iniciar sesión
-  login(usuario: string, clave: string): boolean {
+  async login(usuario: string, clave: string): Promise<boolean> {
     const user = this.usuariosRegistrados.find(u => u.username === usuario && u.password === clave);
     if (user) {
-      localStorage.setItem('loggedIn', 'true'); // Guardar estado de autenticación
-      return true; // Inicio de sesión exitoso
+      localStorage.setItem('loggedIn', 'true');
+      localStorage.setItem('usuario', usuario);
+      localStorage.setItem('role', user.role);
+      return true;
     }
-    return false; // Credenciales incorrectas
+    return false;
   }
 
-  // Método para verificar si el usuario está autenticado
+  // Obtener el rol del usuario autenticado
+  getUserRole(usuario: string): string | null {
+    const user = this.usuariosRegistrados.find(u => u.username === usuario);
+    return user ? user.role : null;
+  }
+
+  // Verificar si el usuario está autenticado
   isLoggedIn(): boolean {
     return localStorage.getItem('loggedIn') === 'true';
   }
 
-  // Método para cerrar sesión
+  // Cerrar sesión
   logout(): void {
-    localStorage.removeItem('loggedIn'); // Eliminar estado de autenticación
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('role');
   }
 
-  // Método mejorado para registrar un nuevo usuario
-  registrar(usuario: string, clave: string): boolean {
+  // Registrar un nuevo usuario con rol
+  registrar(usuario: string, clave: string, role: string): boolean {
     const existe = this.usuariosRegistrados.some(u => u.username === usuario);
     if (existe) {
-      return false; // El usuario ya existe, retorno de error
+      return false; // Usuario ya existe
     } else {
-      this.usuariosRegistrados.push({ username: usuario, password: clave });
+      this.usuariosRegistrados.push({ username: usuario, password: clave, role });
       this.guardarUsuarios(); // Guardar en localStorage
-      return true; // Registro exitoso
+      return true;
     }
   }
 
-  // Método para cambiar la contraseña de un usuario sin requerir la clave antigua
+  // Cambiar la contraseña del usuario
   cambiarClave(usuario: string, nuevaClave: string): boolean {
     const user = this.usuariosRegistrados.find(u => u.username === usuario);
     if (user) {
-      user.password = nuevaClave; // Actualiza la contraseña
-      this.guardarUsuarios(); // Guardar cambios en localStorage
-      return true; // Cambio de contraseña exitoso
+      user.password = nuevaClave;
+      this.guardarUsuarios();
+      return true;
     }
-    return false; // Usuario no encontrado
+    return false;
   }
 
-  // Método para guardar la lista de usuarios en localStorage
+  // Guardar usuarios en localStorage
   private guardarUsuarios(): void {
     localStorage.setItem('usuariosRegistrados', JSON.stringify(this.usuariosRegistrados));
   }
