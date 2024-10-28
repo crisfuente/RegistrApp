@@ -53,6 +53,10 @@ const routes: Routes = [
     path: 'crear-qr',
     loadChildren: () => import('./crear-qr/crear-qr.module').then( m => m.CrearQRPageModule)
   },
+  {
+    path: 'asignaturas-docente',
+    loadChildren: () => import('./asignaturas-docente/asignaturas-docente.module').then( m => m.AsignaturasDocentePageModule)
+  },
 
 
   
