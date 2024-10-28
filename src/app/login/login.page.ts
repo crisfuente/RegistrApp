@@ -44,6 +44,11 @@ export class LoginPage {
     }
   }
 
+  // Navegar a la página de registro
+  irARegistro() {
+    this.router.navigate(['/registro']);
+  }
+
   // Mostrar alerta para mensajes genéricos
   async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
@@ -61,7 +66,7 @@ export class LoginPage {
         {
           text: 'OK',
           handler: () => {
-            this.router.navigate(['/nueva-clave']); // clave-nueva
+            this.router.navigate(['/nueva-clave']);
           }
         }
       ]

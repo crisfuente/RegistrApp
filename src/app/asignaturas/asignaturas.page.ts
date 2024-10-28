@@ -12,8 +12,9 @@ export class AsignaturasPage {
     { nombre: 'Calidad de software', seccion: 'CSY4111',  mostrarAsistencia: false },
     { nombre: 'Ética para el trabajo', seccion: 'EAY4450', mostrarAsistencia: false },
     { nombre: 'Inglés intermedio', seccion: 'INI5111', mostrarAsistencia: false },
-    { nombre: 'Proceso de portafolio 4', seccion: 'APY4461', mostrarAsistencia: false },
     { nombre: 'Programación de aplicaciones móviles', seccion: 'PGY4121', mostrarAsistencia: false },
+    { nombre: 'Proceso de portafolio 4', seccion: 'APY4461', mostrarAsistencia: false }
+    
   ];
 
   constructor(private router: Router) {}

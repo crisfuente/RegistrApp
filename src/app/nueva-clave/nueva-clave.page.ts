@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nueva-clave',
@@ -14,12 +14,12 @@ export class NuevaClavePage {
 
   constructor(
     private fb: FormBuilder,
+    private router: Router,
     private authService: AuthService,
-    private alertController: AlertController,
-    private router: Router
+    private alertController: AlertController
   ) {
     this.formularioClave = this.fb.group({
-      claveAntigua: ['', [Validators.required]],
+      usuario: ['', [Validators.required]],
       nuevaClave: ['', [Validators.required, Validators.minLength(6)]],
       confirmarClave: ['', [Validators.required]]
     }, { validator: this.compararClaves });
@@ -32,15 +32,16 @@ export class NuevaClavePage {
   }
 
   async cambiarClave() {
-    const claveAntigua = this.formularioClave.value.claveAntigua;
+    const usuario = this.formularioClave.value.usuario;
     const nuevaClave = this.formularioClave.value.nuevaClave;
 
-    if (this.authService.verificarClaveAntigua(claveAntigua)) {
-      this.authService.cambiarClave(nuevaClave);
+    const cambioExitoso = this.authService.cambiarClave(usuario, nuevaClave);
+    if (cambioExitoso) {
       await this.mostrarAlerta('Éxito', 'La contraseña ha sido cambiada con éxito.');
-      this.authService.logout(); // Desloguear después de cambiar la clave
+      this.authService.logout();
+      this.router.navigate(['/login']);
     } else {
-      await this.mostrarAlerta('Error', 'La clave antigua no es correcta.');
+      await this.mostrarAlerta('Error', 'El usuario no existe.');
     }
   }
 
@@ -52,18 +53,12 @@ export class NuevaClavePage {
     });
     await alert.present();
   }
-  //retorno normal
-  retorno(){
-    this.router.navigate(['/login']);
+
+  retorno() {
+    this.router.navigate(['/menu']);
   }
 
-  // Retorno al menú solo si está autenticado
   retorno2() {
-    if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/menu']); // Solo redirigir si el usuario está autenticado
-    } else {
-      this.mostrarAlerta('Acceso Denegado', 'Debe iniciar sesión para acceder al menú.');
-      this.router.navigate(['/login']); // Redirigir a login si no está autenticado
-    }
+    this.router.navigate(['/login']);
   }
 }

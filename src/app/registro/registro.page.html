@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nuevo Usuario</ion-label>
+    <ion-input [(ngModel)]="nuevoUsuario" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Nueva Contraseña</ion-label>
+    <ion-input [(ngModel)]="nuevaClave" type="password" required></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="registrar()">Registrar</ion-button>
+</ion-content>

@@ -23,13 +23,17 @@
       <ion-label position="floating">Contraseña</ion-label>
       <ion-input type="password" [(ngModel)]="clave" name="clave" required></ion-input>
     </ion-item>
+    
     <!-- Botón de Login -->
     <ion-button expand="block" (click)="login()" style="--background: purple; --color: white; margin-top: 20px;">
       Iniciar Sesión
     </ion-button>
 
+    <!-- Botón de Restablecer Contraseña -->
     <ion-button fill="clear" expand="block" (click)="recuperarClave()">Restablecer Contraseña</ion-button>
 
+    <!-- Botón de Registro de Nuevo Usuario -->
+    <ion-button fill="clear" expand="block" (click)="irARegistro()">Registrar Nuevo Usuario</ion-button>
 
   </form>
 </ion-content>
