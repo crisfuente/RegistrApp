@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bienvenido {{ usuario }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content">
+  <h2>Opciones</h2>
+
+  <!-- Mis Asignaturas -->
+  <ion-card (click)="asignaturas()">
+    <ion-card-header>
+      <ion-card-title>Mis Asignaturas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Accede a la página de Mis Asignaturas.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mis Asistencias -->
+  <ion-card (click)="asistencias()">
+    <ion-card-header>
+      <ion-card-title>Mis Asistencias</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Accede a la página de Mis Asistencias.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Cambiar Clave -->
+  <ion-card (click)="cambiarClave()">
+    <ion-card-header>
+      <ion-card-title>Cambiar Clave</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Cambiar la clave.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card (click)="asignaturas()">
+    <ion-card-header>
+      <ion-card-title>Leer QR</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Lector QR para registrar asistencia.</p>
+    </ion-card-content>
+  </ion-card>  
+
+<!-- Menú lateral -->
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <!-- salir -->
+        <ion-button expand="block" (click)="logout()">Salir</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

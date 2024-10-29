@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Recuperar Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formularioClave" (ngSubmit)="cambiarClave()">
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text" formControlName="usuario"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nueva Clave</ion-label>
+      <ion-input type="password" formControlName="nuevaClave"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar Nueva Clave</ion-label>
+      <ion-input type="password" formControlName="confirmarClave"></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="!formularioClave.valid">Cambiar Contraseña</ion-button>
+    <br>
+    <ion-button (click)="retorno()" expand="block" fill="clear" shape="round">Regresar al Menú</ion-button>
+    <br>
+    <ion-button (click)="retorno2()" expand="block" fill="clear" shape="round">Regresar al Login</ion-button>
+  </form>
+</ion-content>
