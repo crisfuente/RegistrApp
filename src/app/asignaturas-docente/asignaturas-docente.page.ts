@@ -17,6 +17,7 @@ export class AsignaturasDocentePage {
     
   ];
 
+  texto:any;
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -40,7 +41,8 @@ export class AsignaturasDocentePage {
   }
 
   toggleQR(index: number) {
-    // Alterna el valor de mostrarImagen para la asignatura seleccionada
+    this.texto = "Alexis"
     this.asignaturas[index].mostrarImagen = !this.asignaturas[index].mostrarImagen;
+    
   }
 }

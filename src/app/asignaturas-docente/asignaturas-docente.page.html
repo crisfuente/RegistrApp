@@ -22,10 +22,9 @@
         <ion-button expand="block" (click)="toggleQR(i)">
           {{ asignatura.mostrarImagen ? 'Cerrar QR' : 'Generar QR' }}
         </ion-button>
-        
-        <!-- Imagen que se muestra al presionar el botón -->
-        <ion-img *ngIf="asignatura.mostrarImagen" src="assets/qr-code.png" alt="QR"></ion-img>
-        
+
+        <qrcode [qrdata]="texto" [width]="300"></qrcode>
+
       </ion-card-content>
     </ion-card>
   </ion-list>
