@@ -1,0 +1,61 @@
+<!-- Encabezado -->
+<ion-header> 
+  <ion-toolbar>
+    <ion-title>Hola</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Contenido Principal -->
+<ion-content id="main-content">
+  <h2>Opciones</h2>
+  
+  <!-- Tarjeta: Asignaturas Docente -->
+  <ion-card (click)="asignaturasDocente()">
+    <ion-card-header>
+      <ion-card-title>Asignaturas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Accede a la página de las asignaturas disponibles.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Tarjeta: Cambiar Contraseña -->
+  <ion-card (click)="cambiarClave()">
+    <ion-card-header>
+      <ion-card-title>Cambiar clave</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Accede a la página de Cambiar Contraseña.</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Tarjeta: Registrar Asistencia -->
+  <ion-card (click)="registroAsistencia()">
+    <ion-card-header>
+      <ion-card-title>Registrar Asistencia</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Accede a la página de Registro de Asistencia.</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<!-- Menú Lateral -->
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-button expand="block" (click)="logout()">Salir</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>

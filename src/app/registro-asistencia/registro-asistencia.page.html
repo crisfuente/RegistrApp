@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registrar Asistencia</ion-title>
+    <ion-buttons slot="end">
+      <!-- menú lateral -->
+      <ion-menu-button menu="menu-asistencia" auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content">
+  <!-- Nombre -->
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="nombre" type="text"></ion-input>
+  </ion-item>
+
+  <!-- Fecha -->
+  <ion-item>
+    <ion-label position="floating">Fecha</ion-label>
+    <ion-datetime [(ngModel)]="fecha" displayFormat="DD/MM/YYYY"></ion-datetime>
+  </ion-item>
+
+  <!-- Estado -->
+  <ion-item>
+    <ion-label>Estado</ion-label>
+    <ion-select [(ngModel)]="estado">
+      <ion-select-option value="Presente">Presente</ion-select-option>
+      <ion-select-option value="Ausente">Ausente</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Botón Guardar -->
+  <ion-button expand="block" (click)="guardarAsistencia()">
+    Guardar Asistencia
+  </ion-button>
+</ion-content>
+
+<!-- Menú lateral de registro de asistencia -->
+<ion-menu side="end" contentId="main-content" menuId="menu-asistencia">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <!-- Retorno al menú principal -->
+        <ion-button expand="full" (click)="retorno()">Retorno</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
