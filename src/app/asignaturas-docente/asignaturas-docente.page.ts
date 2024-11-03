@@ -8,20 +8,19 @@ import { Router } from '@angular/router';
 })
 export class AsignaturasDocentePage {
   asignaturas: any[] = [
-    { nombre: 'Programación de aplicaciones móviles', seccion: 'ASY4131', mostrarAsistencia: false, mostrarImagen: false},
-    { nombre: 'Programación de aplicaciones móviles', seccion: 'CSY4111', mostrarAsistencia: false, mostrarImagen: false},
-    { nombre: 'Programación de aplicaciones móviles', seccion: 'EAY4450', mostrarAsistencia: false, mostrarImagen: false},
-    { nombre: 'Programación de aplicaciones móviles', seccion: 'INI5111', mostrarAsistencia: false, mostrarImagen: false},
-    { nombre: 'Programación de aplicaciones móviles', seccion: 'PGY4121', mostrarAsistencia: false, mostrarImagen: false},
-    { nombre: 'Programación de aplicaciones móviles', seccion: 'APY4461', mostrarAsistencia: false, mostrarImagen: false}
-    
+    { nombre: 'Programación de aplicaciones móviles', seccion: 'ASY4131', mostrarAsistencia: false, mostrarImagen: false, textoQR: '' },
+    { nombre: 'Programación de aplicaciones móviles', seccion: 'CSY4111', mostrarAsistencia: false, mostrarImagen: false, textoQR: '' },
+    { nombre: 'Programación de aplicaciones móviles', seccion: 'EAY4450', mostrarAsistencia: false, mostrarImagen: false, textoQR: '' },
+    { nombre: 'Programación de aplicaciones móviles', seccion: 'INI5111', mostrarAsistencia: false, mostrarImagen: false, textoQR: '' },
+    { nombre: 'Programación de aplicaciones móviles', seccion: 'PGY4121', mostrarAsistencia: false, mostrarImagen: false, textoQR: '' },
+    { nombre: 'Programación de aplicaciones móviles', seccion: 'APY4461', mostrarAsistencia: false, mostrarImagen: false, textoQR: '' }
   ];
 
-  texto:any;
+  texto: any;
+  
   constructor(private router: Router) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   toggleAsistencia(index: number) {
     this.asignaturas[index].mostrarAsistencia = !this.asignaturas[index].mostrarAsistencia;
@@ -41,8 +40,16 @@ export class AsignaturasDocentePage {
   }
 
   toggleQR(index: number) {
-    this.texto = "Alexis"
-    this.asignaturas[index].mostrarImagen = !this.asignaturas[index].mostrarImagen;
+    const asignatura = this.asignaturas[index];
     
+    // Alternar el estado de mostrarImagen para esta asignatura
+    asignatura.mostrarImagen = !asignatura.mostrarImagen;
+
+    // Si se va a mostrar el QR, asigna el texto de la sección como valor de QR
+    if (asignatura.mostrarImagen) {
+      asignatura.textoQR = `Sección: ${asignatura.seccion}`;
+    } else {
+      asignatura.textoQR = '';  // Limpia el textoQR si se cierra el QR
+    }
   }
 }

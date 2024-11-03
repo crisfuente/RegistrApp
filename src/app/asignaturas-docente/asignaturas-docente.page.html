@@ -1,12 +1,3 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Mis Asignaturas</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="retorno()">Volver al Menú</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-card *ngFor="let asignatura of asignaturas; let i = index">
@@ -23,8 +14,8 @@
           {{ asignatura.mostrarImagen ? 'Cerrar QR' : 'Generar QR' }}
         </ion-button>
 
-        <qrcode [qrdata]="texto" [width]="300"></qrcode>
-
+        <!-- Generar el QR personalizado con la sección como dato -->
+        <qrcode *ngIf="asignatura.mostrarImagen" [qrdata]="asignatura.textoQR" [width]="300"></qrcode>
       </ion-card-content>
     </ion-card>
   </ion-list>
