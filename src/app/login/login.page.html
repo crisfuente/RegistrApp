@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+  <!-- Icono de usuario -->
+  <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+    <ion-icon name="person-circle-outline" style="font-size: 100px; color: purple;"></ion-icon>
+  </div>
+
+  <!-- Formulario de inicio de sesión -->
+  <form (ngSubmit)="login()" style="width: 100%; max-width: 400px; padding: 0 20px;">
+    
+    <!-- Campo Usuario -->
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input type="text" [(ngModel)]="usuario" name="usuario" required></ion-input>
+    </ion-item>
+    
+    <!-- Campo Contraseña -->
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" [(ngModel)]="clave" name="clave" required></ion-input>
+    </ion-item>
+
+    <!-- Botón de iniciar sesión -->
+    <ion-button expand="block" (click)="login()" style="--background: purple; --color: white; margin-top: 20px;">
+      Iniciar Sesión
+    </ion-button>
+
+    <!-- Botón de recuperar clave -->
+    <ion-button fill="clear" expand="block" (click)="recuperarClave()">Restablecer Contraseña</ion-button>
+
+    <!-- Botón para registrar nuevo usuario -->
+    <ion-button fill="clear" expand="block" (click)="irARegistro()">Registrar Nuevo Usuario</ion-button>
+  </form>
+</ion-content>

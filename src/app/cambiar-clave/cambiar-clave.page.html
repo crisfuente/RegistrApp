@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cambiar Contraseña</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="asignaturas-docente"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="formularioCambioClave" (ngSubmit)="cambiarClave()">
+
+    <ion-item>
+      <ion-label position="floating">Usuario</ion-label>
+      <ion-input formControlName="usuario"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="formularioCambioClave.get('usuario')!.hasError('required') && formularioCambioClave.get('usuario')!.dirty">
+      El usuario es obligatorio.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña Actual</ion-label>
+      <ion-input type="password" formControlName="claveActual"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="formularioCambioClave.get('claveActual')!.hasError('required') && formularioCambioClave.get('claveActual')!.dirty">
+      La contraseña actual es obligatoria.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Nueva Contraseña</ion-label>
+      <ion-input type="password" formControlName="nuevaClave"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="formularioCambioClave.get('nuevaClave')!.hasError('required') && formularioCambioClave.get('nuevaClave')!.dirty">
+      La nueva contraseña es obligatoria.
+    </ion-note>
+    <ion-note color="danger" *ngIf="formularioCambioClave.get('nuevaClave')!.hasError('minlength') && formularioCambioClave.get('nuevaClave')!.dirty">
+      La nueva contraseña debe tener al menos 6 caracteres.
+    </ion-note>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar Nueva Contraseña</ion-label>
+      <ion-input type="password" formControlName="confirmarClave"></ion-input>
+    </ion-item>
+    <ion-note color="danger" *ngIf="formularioCambioClave.get('confirmarClave')!.hasError('required') && formularioCambioClave.get('confirmarClave')!.dirty">
+      Confirmar la nueva contraseña es obligatorio.
+    </ion-note>
+    <ion-note color="danger" *ngIf="formularioCambioClave.hasError('noCoincide') && formularioCambioClave.get('confirmarClave')!.dirty">
+      Las contraseñas no coinciden.
+    </ion-note>
+
+    <ion-button expand="full" type="submit" [disabled]="formularioCambioClave.invalid">
+      Cambiar Contraseña
+    </ion-button>
+  </form>
+</ion-content>
