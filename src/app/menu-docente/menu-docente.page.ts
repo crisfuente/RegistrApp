@@ -8,9 +8,18 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./menu-docente.page.scss'],
 })
 export class MenuDocentePage implements OnInit {
-
+  usuario: string='';
   constructor(private router : Router, private authService : AuthService) { }
+  ionViewWillEnter() {
+    // Establece el nombre del usuario
+    this.usuario = localStorage.getItem('usuario') || 'Invitado';
 
+    // Redirige al login si el usuario no está autenticado
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login']);
+    }
+  }
+  
   ngOnInit() {
   }
 
