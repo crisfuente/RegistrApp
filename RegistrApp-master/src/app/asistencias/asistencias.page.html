@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Asistencias</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="retorno()">Volver al Menú</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <!-- Mostrar cada asignatura como un grupo expandible -->
+    <ion-card *ngFor="let asignatura of asistenciasPorDia; let i = index" (click)="toggleClases(i)">
+      <ion-card-header>
+        <ion-card-title>{{ asignatura.nombre }}</ion-card-title>
+      </ion-card-header>
+
+      <!-- Mostrar las clases si mostrarClases es true -->
+      <ion-card-content *ngIf="asignatura.mostrarClases">
+        <ion-list>
+          <ion-item *ngFor="let clase of asignatura.clases">
+            <ion-label>
+              <p><strong>Día:</strong> {{ clase.dia }}</p>
+              <p [ngClass]="{'presente': clase.estado === 'Presente', 'ausente': clase.estado === 'Ausente'}">
+                <strong>Estado:</strong> {{ clase.estado }}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

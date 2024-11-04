@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Bienvenido {{ usuario }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button auto-hide="false"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content id="main-content">
+  <h2>Opciones</h2>
+  
+  <ion-card (click)="asignaturas()">
+    <ion-card-header>
+      <ion-card-title>Mis Asignaturas</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Accede a la página de Mis Asignaturas.</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-menu side="end" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Opciones</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-button expand="block" (click)="logout()">Salir</ion-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
