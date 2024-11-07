@@ -1,6 +1,13 @@
 <ion-header>
   <ion-toolbar>
+    <!-- Botón de retroceso a la página de inicio de sesión -->
+    <ion-buttons slot="start">
     <ion-title>Bienvenido {{ usuario }}</ion-title>
+    </ion-buttons>
+
+    
+    
+    <!-- Botón para abrir el menú lateral -->
     <ion-buttons slot="end">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
@@ -10,6 +17,7 @@
 <ion-content id="main-content">
   <h2>Opciones</h2>
   
+  <!-- Tarjeta: Mis Asignaturas -->
   <ion-card (click)="asignaturas()">
     <ion-card-header>
       <ion-card-title>Mis Asignaturas</ion-card-title>
@@ -30,12 +38,18 @@
   </ion-card>
 
   <!-- Tarjeta: Registrar Asistencia -->
-  <ion-card (click)="abrirCamara()">
+  <ion-card (click)="startScan()" class="submit">
     <ion-card-header>
       <ion-card-title>Registrar Asistencia</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <p>Utiliza el lector QR para registrar asistencia.</p>
+      <ion-item class="result" *ngIf="scanResult" lines="none">
+        <ion-label>
+          <p>¡Asistencia Registrada!</p>
+          <div>{{scanResult}}</div>
+        </ion-label>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>
@@ -50,12 +64,13 @@
 
   <ion-content>
     <ion-list>
-      <!-- Opciones adicionales en el menú lateral -->
+      <!-- Opción de cambiar contraseña en el menú lateral -->
       <ion-item (click)="cambiarClave()">
         <ion-label>Cambiar Contraseña</ion-label>
       </ion-item>
+
       <ion-item>
-        <ion-button expand="block" (click)="logout()">Salir</ion-button>
+        <ion-button expand="block" color="danger" (click)="logout()">Salir</ion-button>
       </ion-item>
     </ion-list>
   </ion-content>

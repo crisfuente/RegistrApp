@@ -8,11 +8,17 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./menu-docente.page.scss'],
 })
 export class MenuDocentePage implements OnInit {
-  usuario: string='';
-  constructor(private router : Router, private authService : AuthService) { }
+  usuario: string = '';
+  mensajeBienvenida: string = '';  // Nueva propiedad para el mensaje de bienvenida
+
+  constructor(private router: Router, private authService: AuthService) {}
+
   ionViewWillEnter() {
-    // Establece el nombre del usuario
-    this.usuario = localStorage.getItem('usuario') || 'Invitado';
+    // Obtiene el nombre del usuario del sessionStorage
+    this.usuario = sessionStorage.getItem('usuario') || 'Invitado';
+
+    // Establece el mensaje de bienvenida
+    this.mensajeBienvenida = 'Bienvenido, ${this.usuario}';
 
     // Redirige al login si el usuario no está autenticado
     if (!this.authService.isLoggedIn()) {
@@ -20,14 +26,13 @@ export class MenuDocentePage implements OnInit {
     }
   }
   
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   asignaturas() {
     this.router.navigate(['/asignaturas-docente']);
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }

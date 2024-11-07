@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -11,39 +11,29 @@ import { AuthService } from '../services/auth.service';
 export class LoginPage {
   usuario: string = '';
   clave: string = '';
-  rol: string = ''; // Inicialmente es un string vacío
 
   constructor(
     private router: Router,
-    private alertController: AlertController,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertController: AlertController
   ) {}
 
   // Método de inicio de sesión
   async login() {
-    try {
-      // Llamar al servicio de autenticación
-      const isValidUser = await this.authService.login(this.usuario, this.clave);
+    const isValidUser = await this.authService.login(this.usuario, this.clave);
 
-      if (isValidUser) {
-        // Obtener el rol del usuario autenticado (asignar cadena vacía si es null)
-        this.rol = this.authService.getUserRole(this.usuario) || '';
+    if (isValidUser) {
+      const role = this.authService.getUserRole();  // Obtener el rol del usuario autenticado
 
-        // Redirigir según el rol
-        if (this.rol === 'alumno') {
-          this.router.navigate(['/menu']);
-        } else if (this.rol === 'docente') {
-          this.router.navigate(['/menu-docente']);
-        } else {
-          this.mostrarAlerta('Error', 'Rol de usuario no reconocido.');
-        }
+      if (role === 'alumno') {
+        this.router.navigate(['/menu']);  // Redirigir al menú de alumnos
+      } else if (role === 'docente') {
+        this.router.navigate(['/menu-docente']);  // Redirigir al menú de docentes
       } else {
-        // Mostrar error si las credenciales son incorrectas
-        this.mostrarAlerta('Error', 'Usuario o contraseña incorrectos.');
+        this.mostrarAlerta('Error', 'Rol no reconocido.');
       }
-    } catch (error) {
-      this.mostrarAlerta('Error', 'Ocurrió un error inesperado.');
-      console.error(error);
+    } else {
+      this.mostrarAlerta('Error', 'Usuario o contraseña incorrectos.');
     }
   }
 
@@ -53,27 +43,6 @@ export class LoginPage {
       header,
       message,
       buttons: ['OK']
-    });
-    await alert.present();
-  }
-
-  // Navegar a la página de registro
-  irARegistro() {
-    this.router.navigate(['/registro']);
-  }
-
-  // Navegar a la página para recuperar la clave
-  async recuperarClave() {
-    const alert = await this.alertController.create({
-      header: 'Recuperación de Clave',
-      buttons: [
-        {
-          text: 'OK',
-          handler: () => {
-            this.router.navigate(['/nueva-clave']);
-          }
-        }
-      ]
     });
     await alert.present();
   }

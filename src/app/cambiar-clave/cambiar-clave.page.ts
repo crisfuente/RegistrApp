@@ -22,7 +22,7 @@ export class CambiarClavePage {
     this.formularioCambioClave = this.fb.group({
       usuario: ['', [Validators.required]],
       claveActual: ['', [Validators.required]],
-      nuevaClave: ['', [Validators.required, Validators.minLength(6)]],
+      nuevaClave: ['', [Validators.required]],
       confirmarClave: ['', [Validators.required]]
     }, { validator: this.compararClaves });
   }
@@ -44,16 +44,18 @@ export class CambiarClavePage {
     const claveActual = this.formularioCambioClave.value.claveActual;
     const nuevaClave = this.formularioCambioClave.value.nuevaClave;
 
+    // Verificar si la contraseña actual es correcta
     const claveCorrecta = this.authService.verificarClaveActual(usuario, claveActual);
     if (!claveCorrecta) {
       await this.mostrarAlerta('Error', 'La contraseña actual es incorrecta.');
       return;
     }
 
+    // Intentar cambiar la contraseña
     const cambioExitoso = this.authService.cambiarClave(usuario, nuevaClave);
     if (cambioExitoso) {
       await this.mostrarAlerta('Éxito', 'La contraseña ha sido cambiada con éxito.');
-      this.retorno(); // Llamar a la función retorno en lugar de redirigir al login
+      this.retorno(); // Redirigir al login
     } else {
       await this.mostrarAlerta('Error', 'El usuario no existe.');
     }
@@ -69,20 +71,8 @@ export class CambiarClavePage {
     await alert.present();
   }
 
+  // Método para redirigir al login
   retorno() {
-    const usuario = this.formularioCambioClave.get('usuario')?.value;
-    let rol = this.authService.getUserRole(usuario);
-
-    if (!rol) {
-      rol = localStorage.getItem('role');
-    }
-
-    if (rol === 'Alumno') {
-      this.router.navigate(['/menu']);
-    } else if (rol === 'Docente') {
-      this.router.navigate(['/menu-docente']);
-    } else {
-      this.router.navigate(['/login']);
-    }
+    this.router.navigate(['/login']);
   }
 }

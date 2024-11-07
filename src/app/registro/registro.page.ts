@@ -46,36 +46,5 @@ export class RegistroPage {
     await alert.present();
   }
 
-  // Método para registrar al usuario
-  async registrar() {
-    if (this.formularioRegistro.valid) {
-      const { nombre, apellido, edad, rut, fechaNacimiento, correo, nuevaClave, rolSeleccionado } = this.formularioRegistro.value;
-      
-      // Registro de usuario en authService
-      const registroExitoso = this.authService.registrar({
-        nombre,
-        apellido,
-        edad,
-        rut,
-        fechaNacimiento,
-        clave: nuevaClave,   // Ajustar la propiedad a 'clave' en lugar de 'password'
-        rol: rolSeleccionado,
-        correo
-      });
 
-      if (registroExitoso) {
-        await this.mostrarAlerta('Éxito', 'Usuario registrado correctamente.');
-        this.router.navigate(['/login']);
-      } else {
-        await this.mostrarAlerta('Error', 'El nombre de usuario ya existe. Intente con otro.');
-      }
-    } else {
-      await this.mostrarAlerta('Error', 'Por favor, complete todos los campos correctamente.');
-    }
-  }
-
-  // Método para retorno al menú o a otra página
-  retorno() {
-    this.router.navigate(['/menu']); // Cambia '/menu' por la ruta deseada
-  }
 }

@@ -1,6 +1,7 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Bienvenido {{ usuario }}</ion-title>
+    <!-- Muestra el mensaje de bienvenida con el nombre del docente -->
+    <ion-title>Bienvenido, {{ usuario }}</ion-title>
     <ion-buttons slot="end">
       <ion-menu-button auto-hide="false"></ion-menu-button>
     </ion-buttons>
@@ -8,8 +9,8 @@
 </ion-header>
 
 <ion-content id="main-content">
+  
   <h2>Opciones</h2>
-
   <ion-card (click)="asignaturas()">
     <ion-card-header>
       <ion-card-title>Mis Asignaturas</ion-card-title>
@@ -34,7 +35,7 @@
         <ion-label>Cambiar Contraseña</ion-label>
       </ion-item>
       <ion-item>
-        <ion-button expand="block" (click)="logout()">Salir</ion-button>
+        <ion-button expand="block" color="danger" (click)="logout()">Salir</ion-button>
       </ion-item>
     </ion-list>
   </ion-content>
